@@ -18,16 +18,14 @@
                             @csrf
                             <div class="mb-3">
                                 <label class="form-label">Gönderen Kullanıcı Adı </label>
-                                <x-admin.elements.input :name="'gonderen_username'" :placeholder="'gönderen kullanıcı adı...'"
-                                                        class="form-control"></x-admin.elements.input>
+                                <x-admin.elements.input :name="'gonderen_username'" :placeholder="'gönderen kullanıcı adı...'" class="form-control"></x-admin.elements.input>
                                 <p>
                                     @if($errors->has("gonderen_username"))
                                         {{$errors->first("gonderen_username")}}
                                     @endif
                                 </p>
                                 <label class="form-label">Gönderilen Kullanıcı Adı </label>
-                                <x-admin.elements.input :name="'gonderilen_username'" :placeholder="'gönderilen kullanıcı adı...'"
-                                                        class="form-control"></x-admin.elements.input>
+                                <x-admin.elements.input :name="'gonderilen_username'" :placeholder="'gönderilen kullanıcı adı...'" class="form-control"></x-admin.elements.input>
                                 <p>
                                     @if($errors->has("gonderilen_username"))
                                         {{$errors->first("gonderilen_username")}}
@@ -70,34 +68,37 @@
                                     @endif
                                 </p>
                                 <label class="form-label">Gönderilen İlçeyi Yazınız: </label>
-                                <x-admin.elements.input :name="'gonderilen_ilce'" :placeholder="'gönderilen ilçe...'"
-                                                        class="form-control"></x-admin.elements.input>
+                                <x-admin.elements.input :name="'gonderilen_ilce'" :placeholder="'gönderilen ilçe...'" class="form-control"></x-admin.elements.input>
                                 <p>
                                     @if($errors->has("gonderilen_ilce"))
                                         {{$errors->first("gonderilen_ilce")}}
                                     @endif
                                 </p>
                                 <label class="form-label">Tam Adresi Giriniz: </label>
-                                <x-admin.elements.input :name="'tam_adres'" :placeholder="'tam adresi giriniz...'"
-                                                        class="form-control"></x-admin.elements.input>
+                                <x-admin.elements.input :name="'tam_adres'" :placeholder="'tam adresi giriniz...'" class="form-control"></x-admin.elements.input>
                                 <p>
                                     @if($errors->has("tam_adres"))
                                         {{$errors->first("tam_adres")}}
                                     @endif
                                 </p>
-                                <x-admin.elements.input :type="'submit'" :name="'cargoCreate'" class="btn btn-warning"
-                                                        style="padding: 10px; margin-top: 20px"></x-admin.elements.input>
+                                <x-admin.elements.input :type="'submit'" :name="'cargoCreate'" class="btn btn-warning" style="padding: 10px; margin-top: 20px"></x-admin.elements.input>
                             </div>
                         </form>
                     </x-slot>
                 </x-admin.layouts.card>
-
             </div>
             <div class="col-sm-12">
                 <x-admin.layouts.card>
                     <x-slot name="title">Kargolar</x-slot>
                     <x-slot name="content">
-
+                        <div class="col-3">
+                            <form action="{{route("backoffice.cargooperations.show")}}" method="GET" class="d-flex">
+                                @csrf
+                                @method("GET")
+                                <input class="form-control me-2" type="search" name="cargoOperationsSearch" placeholder="kargo ara..." aria-label="Search">
+                                <button class="btn btn-outline-warning" type="submit">Ara</button>
+                            </form>
+                        </div>
                         <table style="text-align: center;">
                             <tr>
                                 <th>Takip Numarası</th>
@@ -110,7 +111,7 @@
                                 <th>Gönderilen İlçe</th>
                                 <th>Tam Adres</th>
                             </tr>
-                            @foreach($list as $item)
+                            @foreach($cargoList as $item)
                                 <tr style="border-bottom: white 1px solid">
 
                                     <td>{{$item->id}}</td>
@@ -130,11 +131,12 @@
                                                 Düzenle
                                             </button>
                                         </form>
-                                        <form action="{{route("backoffice.cargooperations.destroy", ['id'=>$item->id])}}" method="POST">
+                                        <form
+                                            action="{{route("backoffice.cargooperations.destroy", ['id'=>$item->id])}}"
+                                            method="POST">
                                             @csrf
                                             @method("DELETE")
-                                            <button type="submit" class="btn btn-danger"
-                                                    style="margin-top:5px; margin-bottom: 5px;">Sil
+                                            <button type="submit" class="btn btn-danger" style="margin-top:5px; margin-bottom: 5px;">Sil
                                             </button>
                                         </form>
                                     </td>

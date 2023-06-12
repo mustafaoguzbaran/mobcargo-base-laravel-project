@@ -9,6 +9,14 @@
             <x-admin.layouts.card>
                 <x-slot name="title">Kullanıcılar</x-slot>
                 <x-slot name="content">
+                    <div class="col-3">
+                        <form action="{{route("backoffice.users")}}" method="GET" class="d-flex">
+                            @csrf
+                            @method("GET")
+                            <input class="form-control me-2" type="search" name="searchUserBackoffice" placeholder="kullanıcı ara..." aria-label="Search">
+                            <button class="btn btn-outline-warning" type="submit">Ara</button>
+                        </form>
+                    </div>
                     <table style="text-align: center;">
                         <tr>
                             <th>Kullanıcı ID</th>

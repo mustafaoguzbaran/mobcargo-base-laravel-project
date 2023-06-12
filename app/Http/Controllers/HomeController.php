@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CheckCargoRequest;
 use App\Models\Cargo;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -39,5 +40,16 @@ class HomeController extends Controller
             return view("front.checkCargo", compact("checkCargo"));
         }
     }
+
+    public function search(Request $request)
+    {
+
+        $searchResult = User::query()->where("username", "LIKE", "{$request->search}%")
+            ->orWhere("email", "LIKE", "{$request->search}%")
+            ->orWhere("phone_number", "LIKE", "{$request->search}%")
+            ->get();
+        return view("front.searchresult", compact("searchResult"));
+    }
+
 
 }

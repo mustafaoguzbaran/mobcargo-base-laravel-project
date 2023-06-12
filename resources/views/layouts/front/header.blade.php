@@ -41,8 +41,10 @@ if(isset(auth()->user()->username)){
                 {{""}}
             @endif
             <form action="{{route("logout")}}" method="POST" id="logout">@csrf</form>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Ara" aria-label="Search">
+            <form action="{{route("search")}}" method="GET" class="d-flex">
+                @csrf
+                @method("GET")
+                <input class="form-control me-2" type="search" name="search" placeholder="kullanıcı ara..." aria-label="Search">
                 <button class="btn btn-outline-warning" type="submit">Ara</button>
             </form>
         </div>

@@ -39,6 +39,9 @@ Route::get('/useredit', [UsersController::class, "userEditShow"])->name("useredi
 
 Route::patch('/useredit', [UsersController::class, "userEditUpdateFront"])->name('front.useredit');
 
+Route::get('/search', [HomeController::class, "search"])->name("search");
+
+
 Route::prefix("/backoffice")->group(function () {
 
     Route::get('/', [BackofficeHomeController::class, "index"])->name("backoffice");

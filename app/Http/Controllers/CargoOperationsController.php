@@ -8,10 +8,17 @@ use Illuminate\Http\Request;
 
 class CargoOperationsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $list = Cargo::all();
-        return view("admin.cargooperations", compact('list'));
+        if ($request->cargoOperationsSearch == null) {
+            $cargoList = Cargo::all();
+            return view("admin.cargooperations", compact('cargoList'));
+        } else {
+            $cargoList = Cargo::query()->where("gonderen_username", "LIKE", "{$request->cargoOperationsSearch}%")
+                ->orWhere("gonderilen_username", "LIKE", "{$request->cargoOperationsSearch}%")
+                ->get();
+            return view("admin.cargooperations", compact("cargoList"));
+        }
     }
 
     public function store(CargoOperationsCreateRequest $request)

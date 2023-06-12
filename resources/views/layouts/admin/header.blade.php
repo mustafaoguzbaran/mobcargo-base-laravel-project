@@ -18,10 +18,12 @@
                     <a class="nav-link {{Route::is("backoffice.users") ? "active" : "" }}" href="{{route("backoffice.users")}}">Kullanıcılar</a>
                 </li>
             </ul>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Ara" aria-label="Search">
-                <button class="btn btn-outline-warning" type="submit">Ara</button>
-            </form>
+            @if(isset(auth()->user()->username))
+                <div class="text-light" style="margin-right: 10px; "><a style="text-decoration: none" class="text-light" href="#" onclick="event.preventDefault(); document.getElementById('logout').submit()">Çıkış Yap</a></div>
+            @else
+                {{""}}
+            @endif
+            <form action="{{route("logout")}}" method="POST" id="logout">@csrf</form>
         </div>
     </div>
 </nav>

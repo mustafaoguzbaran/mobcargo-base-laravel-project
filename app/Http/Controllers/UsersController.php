@@ -11,10 +11,18 @@ use Illuminate\Validation\Rules\Password;
 
 class UsersController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $usersList = User::all();
-        return view("admin.users", compact('usersList'));
+        if ($request->searchUserBackoffice == null) {
+            $usersList = User::all();
+            return view("admin.users", compact('usersList'));
+        } else {
+            $usersList = User::query()->where("username", "LIKE", "{$request->searchUserBackoffice}%")
+                ->orWhere("email", "LIKE", "{$request->searchUserBackoffice}%")
+                ->orWhere("phone_number", "LIKE", $request->searchUserBackoffice)
+                ->get();
+            return view("admin.users", compact("usersList"));
+        }
     }
 
     public function logout(Request $request)
