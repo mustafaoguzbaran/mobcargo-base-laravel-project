@@ -10,9 +10,9 @@
                     @foreach($userData as $item)
                     <x-slot name="title">{{$item->username}} Kullanıcısı Düzenle</x-slot>
                             <x-slot name="content">
-                                <form method="POST">
+                                <form method="POST" action="{{route("backoffice.useredit", ['id' => $item->id])}}">
                                     @csrf
-                                    @method("POST")
+                                    @method("PATCH")
                                     <label class="form-label">İsim Soyisim Değiştir</label>
                                     <x-admin.elements.input :name="'name_edit'" :value="$item->name" :placeholder="'isim yazınız...'" class="form-control"></x-admin.elements.input>
                                     <label class="form-label">Kullanıcı Adı Değiştir</label>

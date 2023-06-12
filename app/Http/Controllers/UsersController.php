@@ -53,18 +53,22 @@ class UsersController extends Controller
             ->update($userDataUpdateFront);
         return redirect()->route("useredit");
     }
-    public function userEditUpdateBackoffice(Request $request) {
+
+    public function userEditUpdateBackoffice(Request $request)
+    {
         $userDataUpdateBackoffice = array_filter([
-           "name" => $request->name_edit,
-           "username" => $request->username_edit,
-           "email" => $request->email_edit,
-           "phone_number" => $request->phone_number_edit
+
+            "name" => $request->name_edit,
+            "username" => $request->username_edit,
+            "email" => $request->email_edit,
+            "phone_number" => $request->phone_number_edit
         ]);
-        if($request->password_edit != null) {
+        if ($request->password_edit != null) {
             $userDataUpdateBackoffice["password"] = Hash::make($request->password_edit);
-            User::where("id", $request->id)
-                ->update($userDataUpdateBackoffice);
-            return redirect()->route("useredit.backoffice");
         }
+        User::where("id", $request->id)
+            ->update($userDataUpdateBackoffice);
+        return redirect()->route("backoffice.useredit", ["id" => $request->id]);
+
     }
 }
