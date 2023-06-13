@@ -29,9 +29,11 @@ if(isset(auth()->user()->username)){
                     <li class="nav-item">
                         <a class="nav-link {{Route::is("useredit") ? "active" : "" }}" href="{{route("useredit")}}">Hesap Ayarları</a>
                     </li>
+                @role("Admin")
                     <li class="nav-item">
                         <a class="nav-link {{Route::is("backoffice") ? "active" : "" }}" href="{{route("backoffice")}}">Backoffice</a>
                     </li>
+                    @endrole
                 @endif
 
             </ul>

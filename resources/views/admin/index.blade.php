@@ -12,7 +12,7 @@
                 <x-admin.layouts.card>
                     <x-slot name="title">Hoşgeldin, {{auth()->user()->name}}</x-slot>
                     <x-slot name="content">
-                        <h2><b>Yetki: </b>{{auth()->user()->auth}}</h2>
+                        <h2><b>Yetki: </b>@foreach(auth()->user()->getRoleNames() as $role) {{$role}}@endforeach</h2>
                         <a><b>Sistem Tarihi: </b>{{date('d.m.Y H:i:s')}}</a>
                     </x-slot>
 

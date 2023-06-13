@@ -13,6 +13,12 @@
                                 <form method="POST" action="{{route("backoffice.useredit", ['id' => $item->id])}}">
                                     @csrf
                                     @method("PATCH")
+                                    <label class="form-label">Yetki Ver</label>
+                                    <select class="form-select" name="role" aria-label="Default select example">
+                                        @foreach($test as $role)
+                                        <option value="{{$role->name}}">{{$role->name}}</option>
+                                        @endforeach
+                                    </select>
                                     <label class="form-label">İsim Soyisim Değiştir</label>
                                     <x-admin.elements.input :name="'name_edit'" :value="$item->name" :placeholder="'isim yazınız...'" class="form-control"></x-admin.elements.input>
                                     <label class="form-label">Kullanıcı Adı Değiştir</label>

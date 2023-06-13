@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Testing\Fluent\Concerns\Has;
 use Illuminate\Validation\Rules\Password;
+use Spatie\Permission\Models\Role;
 
 class UsersController extends Controller
 {
@@ -43,7 +44,8 @@ class UsersController extends Controller
     public function userEditBackofficeShow(Request $request)
     {
         $userData = User::where("id", $request->id)->get();
-        return view("admin.useredit", compact('userData'));
+        $test = Role::all();
+        return view("admin.useredit", compact('userData', 'test'));
     }
 
     public function userEditUpdateFront(Request $request)
@@ -74,8 +76,11 @@ class UsersController extends Controller
         if ($request->password_edit != null) {
             $userDataUpdateBackoffice["password"] = Hash::make($request->password_edit);
         }
-        User::where("id", $request->id)
+
+        User::find($request->id)
             ->update($userDataUpdateBackoffice);
+        $user = User::find($request->id);
+        $user->syncRoles($request->role);
         return redirect()->route("backoffice.useredit", ["id" => $request->id]);
 
     }

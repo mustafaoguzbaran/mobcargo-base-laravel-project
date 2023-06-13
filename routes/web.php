@@ -42,7 +42,7 @@ Route::patch('/useredit', [UsersController::class, "userEditUpdateFront"])->name
 Route::get('/search', [HomeController::class, "search"])->name("search");
 
 
-Route::prefix("/backoffice")->group(function () {
+Route::prefix("/backoffice")->middleware("role:Admin")->group(function () {
 
     Route::get('/', [BackofficeHomeController::class, "index"])->name("backoffice");
 
