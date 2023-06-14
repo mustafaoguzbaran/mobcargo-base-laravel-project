@@ -24,9 +24,11 @@ class LoginController extends Controller
     {
         $username = $request->username;
         $password = $request->password;
+        $remember = $request->remember;
+        !is_null($remember) ? $rememberme = true : $remember = false;
         $user = User::where("username", $username)->first();
         if ($username && Hash::check($password, $user->password)) {
-            Auth::login($user);
+            Auth::login($user, $remember);
             return redirect()->route("home");
         } else {
             return redirect()

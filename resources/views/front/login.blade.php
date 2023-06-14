@@ -22,6 +22,10 @@
                     <x-front.elements.input :name="'username'" :placeholder="'kullanıcı adınızı girin...'" class="form-control" value="{{old('username')}}"></x-front.elements.input>
                     <label class="form-label">Parola</label>
                     <x-front.elements.input :type="'password'" :name="'password'" :placeholder="'parolanızı girin...'" class="form-control"></x-front.elements.input>
+                    <label class="form-label">Beni Hatırla</label>
+                        <x-front.elements.input :type="'checkbox'" :value="1" :name="'remember'"></x-front.elements.input>
+
+
                     <x-front.elements.input :type="'submit'" :name="'login'" :value="'Giriş Yap'" class="btn btn-warning" style="padding: 10px; margin-top: 20px"></x-front.elements.input>
                     </form>
                 </x-slot>
