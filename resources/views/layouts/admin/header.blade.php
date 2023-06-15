@@ -17,6 +17,9 @@
                 <li class="nav-item">
                     <a class="nav-link {{Route::is("backoffice.users") ? "active" : "" }}" href="{{route("backoffice.users")}}">Kullanıcılar</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{Route::is("backoffice.logs") ? "active" : "" }}" href="{{route("backoffice.logs")}}">Hata Logları</a>
+                </li>
             </ul>
             @if(isset(auth()->user()->username))
                 <div class="text-light" style="margin-right: 10px; "><a style="text-decoration: none" class="text-light" href="#" onclick="event.preventDefault(); document.getElementById('logout').submit()">Çıkış Yap</a></div>

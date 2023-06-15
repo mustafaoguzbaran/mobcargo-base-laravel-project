@@ -61,6 +61,8 @@ Route::prefix("/backoffice")->middleware("role:Admin")->group(function () {
     Route::patch('/users/{id}', [UsersController::class, "userEditUpdateBackoffice"])->name('backoffice.useredit');
 
     Route::get('/users/{id}', [UsersController::class, "userEditBackofficeShow"])->name("backoffice.useredit");
+
+    Route::get('/logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index'])->name("backoffice.logs");
 });
 
 
