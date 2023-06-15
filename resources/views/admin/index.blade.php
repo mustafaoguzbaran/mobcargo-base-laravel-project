@@ -12,12 +12,19 @@
                 <x-admin.layouts.card>
                     <x-slot name="title">Hoşgeldin, {{auth()->user()->name}}</x-slot>
                     <x-slot name="content">
-                        <h2><b>Yetki: </b>@foreach(auth()->user()->getRoleNames() as $role) {{$role}}@endforeach</h2>
+                        <h2><b>Yetki: </b>@foreach(auth()->user()->getRoleNames() as $role)
+                                {{$role}}
+                            @endforeach</h2>
                         <a><b>Sistem Tarihi: </b>{{date('d.m.Y H:i:s')}}</a>
                     </x-slot>
 
                 </x-admin.layouts.card>
-             <div id="chart" style="margin-top: 90px; margin-bottom: 90px"></div>
+            </div>
+            <div class="col-6">
+                <div id="usersChart" style="margin-top: 90px; margin-bottom: 90px"></div>
+            </div>
+            <div class="col-6">
+                <div id="cargosChart" style="margin-top: 90px; margin-bottom: 90px"></div>
             </div>
         </div>
     </div>
@@ -25,39 +32,82 @@
 
 @section("js")
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script>  var options = {
-            series: [{
-                name: "Desktops",
-                data: [10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-            }],
+    <script>
+        // Kullanıcı verilerini PHP'den alın
+        var userCounts = @json($usersData);
+
+        // Ay ve kullanıcı sayıları için dizi oluştur
+        var months = [];
+        var counts = [];
+
+        userCounts.forEach(function (user) {
+            months.push(user.users_month + ". ay");
+            counts.push(user.total_user);
+        });
+
+        // Grafik ayarlarını yapılandır
+        var options = {
             chart: {
-                height: 350,
-                type: 'line',
-                zoom: {
-                    enabled: false
-                }
-            },
-            dataLabels: {
-                enabled: false
-            },
-            stroke: {
-                curve: 'straight'
+                type: 'bar',
+                height: 350
             },
             title: {
-                text: 'Aylara göre tamamlanan kargolanmalar',
+                text: 'Aylara göre kayıtlı kullancı sayısı',
                 align: 'left'
             },
-            grid: {
-                row: {
-                    colors: ['transparent'], // takes an array which will be repeated on columns
-                    opacity: 0.5
-                },
-            },
+            series: [{
+                name: 'Kullanıcı Sayısı',
+                data: counts,
+                color: '#212529'
+            }],
             xaxis: {
-                categories: ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'],
+                categories: months
             }
         };
 
-        var chart = new ApexCharts(document.querySelector("#chart"), options);
-        chart.render();</script>
+        // Grafik nesnesini oluştur
+        var chart = new ApexCharts(document.querySelector("#usersChart"), options);
+
+        // Grafik nesnesini render et
+        chart.render();
+    </script>
+    <script>
+        // Kullanıcı verilerini PHP'den alın
+        var cargoCounts = @json($cargosData);
+
+        // Ay ve kullanıcı sayıları için dizi oluştur
+        var months = [];
+        var counts = [];
+
+        cargoCounts.forEach(function (cargo) {
+            months.push(cargo.cargo_month + ". ay");
+            counts.push(cargo.total_cargo);
+        });
+
+        // Grafik ayarlarını yapılandır
+        var options = {
+            chart: {
+                type: 'bar',
+                height: 350,
+            },
+            title: {
+                text: 'Aylara göre kargolama sayısı',
+                align: 'left'
+            },
+            series: [{
+                name: 'Kullanıcı Sayısı',
+                data: counts,
+                color: '#212529'
+            }],
+            xaxis: {
+                categories: months
+            }
+        };
+
+        // Grafik nesnesini oluştur
+        var chart = new ApexCharts(document.querySelector("#cargosChart"), options);
+
+        // Grafik nesnesini render et
+        chart.render();
+    </script>
 @endsection
