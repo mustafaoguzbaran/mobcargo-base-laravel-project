@@ -11,6 +11,10 @@
                     <a class="nav-link {{Route::is("backoffice") ? "active" : ""}}" aria-current="page"
                        href="{{route("backoffice")}}">Anasayfa</a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link {{Route::is("backoffice.settings") ? "active" : "" }}" href="{{route("backoffice.settings")}}">Genel Ayarlar</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link {{Route::is("backoffice.cargooperations.show") ? "active" : ""}}" href="{{route("backoffice.cargooperations.show")}}">Kargo İşlemleri</a>
                 </li>
@@ -19,6 +23,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{Route::is("backoffice.logs") ? "active" : "" }}" href="{{route("backoffice.logs")}}">Hata Logları</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{Route::is("backoffice.user.logs") ? "active" : "" }}" href="{{route("backoffice.userlogs")}}">User Logları</a>
                 </li>
             </ul>
             @if(isset(auth()->user()->username))

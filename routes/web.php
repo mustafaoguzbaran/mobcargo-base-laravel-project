@@ -63,6 +63,11 @@ Route::prefix("/backoffice")->middleware("role:Admin")->group(function () {
     Route::get('/users/{id}', [UsersController::class, "userEditBackofficeShow"])->name("backoffice.useredit");
 
     Route::get('/logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index'])->name("backoffice.logs");
+
+    Route::get('/userlogs', [BackofficeHomeController::class, "index"])->name("backoffice.userlogs");
+
+    Route::get('/settings', [BackofficeHomeController::class, "index"])->name("backoffice.settings");
+
 });
 
 
