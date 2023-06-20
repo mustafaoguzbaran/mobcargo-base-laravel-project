@@ -21,4 +21,5 @@ class BackofficeHomeController extends Controller
             ->get();
         return view("admin.index", compact("usersData", "cargosData"));
     }
+    
 }
