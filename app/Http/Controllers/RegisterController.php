@@ -30,7 +30,7 @@ class RegisterController extends Controller
             "password" => $request->password_register,
         ];
         $user = User::create($data);
-        $user->syncRoles(Role::find(2)->name);
+        $user->syncRoles(Role::find(4));
         return redirect()->route("home");
     }
 }
