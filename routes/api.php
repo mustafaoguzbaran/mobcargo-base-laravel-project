@@ -30,4 +30,14 @@ Route::prefix('v1')->middleware('auth:api')->group(function () {
     Route::post('/user/add', [\App\Http\Controllers\Api\V1\UserController::class, "store"]);
 
     Route::patch('/user/{id}/update', [\App\Http\Controllers\Api\V1\UserController::class, "update"]);
+
+    Route::get('/cargos', [\App\Http\Controllers\Api\V1\CargoController::class, "getAllCargos"]);
+
+    Route::get('/cargo/{id}', [\App\Http\Controllers\Api\V1\CargoController::class, "getCargo"]);
+
+    Route::delete('/cargo/{id}/delete', [\App\Http\Controllers\Api\V1\CargoController::class, "destroy"]);
+
+    Route::post('/cargo/add', [\App\Http\Controllers\Api\V1\CargoController::class, "store"]);
+
+    Route::patch('/cargo/{id}/update', [\App\Http\Controllers\Api\V1\CargoController::class, "update"]);
 });
