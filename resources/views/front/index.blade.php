@@ -4,11 +4,12 @@
 @endsection
 
 @section("content")
+    @foreach($systemInfos as $item) @endforeach
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <x-front.layouts.card>
-                    <x-slot name="title">MOB Cargo Hız ve Memnuniyet Bizim İşimiz!</x-slot>
+                    <x-slot name="title">{{$item->main_header}}</x-slot>
                 </x-front.layouts.card>
             </div>
             <div class="col-lg-4">
@@ -53,14 +54,8 @@
             </div>
             <div class="col-12">
                 <x-front.layouts.card>
-                    <x-slot name="title">MOB CARGO Kimdir?</x-slot>
-                    <x-slot name="content">
-                        2023 yılında faaliyete giren MOBCARGO, sizlere daha iyi, çevreci ve HIZLI teslimat amacıyla
-                        kuruldu. Yönetim kurulu başkanımız Mustafa Oğuz BARAN'ın sizleri çok sevdiğini de belirtmek
-                        istiyoruz. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed magna ultricies,
-                        vulputate mauris sed, molestie velit. Etiam semper mauris sit amet enim dignissim mattis sit
-                        amet sed ipsum.
-                    </x-slot>
+                    <x-slot name="title">{{$item->main_info_title}}</x-slot>
+                    <x-slot name="content">{{$item->main_info_content}}</x-slot>
                 </x-front.layouts.card>
             </div>
         </div>

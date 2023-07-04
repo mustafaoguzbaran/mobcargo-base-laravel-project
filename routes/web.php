@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CargoOperationsController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -66,7 +67,9 @@ Route::prefix("/backoffice")->middleware("role:Admin")->group(function () {
 
     Route::get('/userlogs', [BackofficeHomeController::class, "index"])->name("backoffice.userlogs");
 
-    Route::get('/settings', [BackofficeHomeController::class, "index"])->name("backoffice.settings");
+    Route::get('/settings', [SettingsController::class, "index"])->name("backoffice.settings");
+
+    Route::patch('/settings', [SettingsController::class, "update"])->name("backoffice.settings");
 
 });
 

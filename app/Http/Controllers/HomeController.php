@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CheckCargoRequest;
 use App\Models\Cargo;
+use App\Models\Settings;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -13,7 +14,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return view("front.index");
+        $systemInfos = Settings::all();
+        return view("front.index", compact("systemInfos"));
     }
 
     public function login()
