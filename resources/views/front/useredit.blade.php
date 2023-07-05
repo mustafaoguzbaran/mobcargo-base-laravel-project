@@ -10,7 +10,7 @@
                 <x-admin.layouts.card>
                     <x-slot name="title">Kullanıcı Bilgilerini Düzenle</x-slot>
                     <x-slot name="content">
-                        <form method="POST" action="{{route("front.useredit", auth()->user()->id)}}">
+                        <form method="POST" action="{{route("user.update", auth()->user()->id)}}">
                             @csrf
                             @method("PATCH")
                             <label class="form-label">İsim Soyisim Değiştir</label>

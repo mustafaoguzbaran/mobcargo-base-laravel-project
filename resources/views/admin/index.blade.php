@@ -34,7 +34,7 @@
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script>
         // Kullanıcı verilerini PHP'den alın
-        var userCounts = @json($usersData);
+        var userCounts = @json($getUsersData);
 
         // Ay ve kullanıcı sayıları için dizi oluştur
         var months = [];
@@ -73,7 +73,7 @@
     </script>
     <script>
         // Kullanıcı verilerini PHP'den alın
-        var cargoCounts = @json($cargosData);
+        var cargoCounts = @json($getCargosData);
 
         // Ay ve kullanıcı sayıları için dizi oluştur
         var months = [];

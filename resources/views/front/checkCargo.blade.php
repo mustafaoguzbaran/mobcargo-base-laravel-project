@@ -22,7 +22,7 @@
                                 <th>Tam Adres</th>
                             </tr>
                             <tr>
-                                @foreach($checkCargo as $item)
+                                @foreach($getCheckCargo as $item)
                                     <td>{{$item->id}}</td>
                                     <td>{{$item->kargo_durum}}</td>
                                     <td>{{"@".$item->gonderen_username}}</td>

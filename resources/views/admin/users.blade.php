@@ -1,7 +1,6 @@
 @extends("layouts.admin")
 @section("css")
 @endsection
-
 @section("content")
 <div class="container">
     <div class="row">
@@ -26,7 +25,7 @@
                             <th>Rol</th>
                             <th>Tel. No</th>
                         </tr>
-                        @foreach($usersList as $item)
+                        @foreach($getUsersList as $item)
                             <tr style="border-bottom: white 1px solid">
                                 <td>{{$item->id}}</td>
 
@@ -36,7 +35,7 @@
                                 <td>{{$item->auth}}</td>
                                 <td>{{$item->phone_number}}</td>
                                 <td>
-                                    <form action="{{route('backoffice.useredit', ['id' => $item->id])}}" method="GET">
+                                    <form action="{{route('backoffice.user.edit', ['id' => $item->id])}}" method="GET">
                                         @csrf
                                         @method("GET")
                                     <button type="submit" class="btn btn-danger" style="margin-left: 30px">Kullanıcıyı Düzenle</button>

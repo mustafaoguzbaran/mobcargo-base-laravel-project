@@ -3,10 +3,10 @@
 use App\Http\Controllers\BackofficeHomeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\CargoOperationsController;
+use App\Http\Controllers\CargoController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\SettingsController;
-use App\Http\Controllers\UsersController;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,57 +22,56 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, "index"])->name("home");
 
-Route::get('/login', [LoginController::class, "showLoginForm"])->name("login");
+Route::get('/login', [UserController::class, "login"])->name("login.index");
 
-Route::post('/login', [LoginController::class, "login"])->name("login");
+Route::post('/login', [UserController::class, "loginCheck"])->name("login");
 
-Route::post('/logout', [UsersController::class, "logout"])->name("logout");
+Route::get('/register', [UserController::class, "register"])->name("register.index");
 
-Route::get('register', [RegisterController::class, "registerShowForm"])->name("register");
+Route::post('/register', [UserController::class, "store"])->name("register.store");
 
-Route::post('register', [RegisterController::class, "store"])->name("register.store");
+Route::post('/logout', [UserController::class, "logout"])->name("logout");
 
 Route::get('/checkcargo', [HomeController::class, "checkCargo"])->name("checkCargo");
 
 Route::post('/checkcargo', [HomeController::class, "checkCargo"]);
 
-Route::get('/useredit', [UsersController::class, "userEditShow"])->name("useredit");
+Route::get('user/{id}/edit', [UserController::class, "edit"])->name("user.edit");
 
-Route::patch('/useredit', [UsersController::class, "userEditUpdateFront"])->name('front.useredit');
+Route::patch('/user/{id}', [UserController::class, "update"])->name('user.update');
 
 Route::get('/search', [HomeController::class, "search"])->name("search");
 
 
 Route::prefix("/backoffice")->middleware("role:Admin")->group(function () {
 
-    Route::get('/', [BackofficeHomeController::class, "index"])->name("backoffice");
+    Route::get('/', [HomeController::class, "index"])->name("backoffice");
 
-    Route::get('/cargooperations', [CargoOperationsController::class, "index"])->name("backoffice.cargooperations.show");
+    Route::get('/cargos', [CargoController::class, "index"])->name("cargos.index");
 
-    Route::post('/cargooperations', [CargoOperationsController::class, "store"])->name("backoffice.cargooperations.store");
+    Route::post('/cargos', [CargoController::class, "store"])->name("cargos.store");
 
-    Route::delete('/cargooperations/{id}', [CargoOperationsController::class, "destroy"])->name("backoffice.cargooperations.destroy");
+    Route::delete('/cargos/{id}', [CargoController::class, "destroy"])->name("cargos.destroy");
 
-    Route::get('cargoedit/{id}', [CargoOperationsController::class, 'cargoEditShow'])->name("cargoedit");
+    Route::get('cargos/{id}/edit', [CargoController::class, 'edit'])->name("cargos.edit");
 
-    Route::patch('cargoedit/{id}', [CargoOperationsController::class, 'cargoEditPut']);
+    Route::patch('/cargos/{id}', [CargoController::class, 'update'])->name("cargos.update");
 
-    Route::get('/users', [UsersController::class, "index"])->name("backoffice.users");
+    Route::get('/users', [UserController::class, "index"])->name("backoffice.users");
 
-    Route::patch('/users/{id}', [UsersController::class, "userEditUpdateBackoffice"])->name('backoffice.useredit');
+    Route::get('/users/{id}/edit', [UserController::class, "edit"])->name("backoffice.user.edit");
 
-    Route::get('/users/{id}', [UsersController::class, "userEditBackofficeShow"])->name("backoffice.useredit");
+    Route::patch('/users/{id}', [UserController::class, "update"])->name('backoffice.user.update');
 
     Route::get('/logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index'])->name("backoffice.logs");
 
-    Route::get('/userlogs', [BackofficeHomeController::class, "index"])->name("backoffice.userlogs");
+    Route::get('/userlogs', [HomeController::class, "index"])->name("backoffice.userlogs");
 
-    Route::get('/settings', [SettingsController::class, "index"])->name("backoffice.settings");
+    Route::get('/settings', [SettingController::class, "index"])->name("backoffice.settings");
 
-    Route::patch('/settings', [SettingsController::class, "update"])->name("backoffice.settings");
+    Route::patch('/settings', [SettingController::class, "update"])->name("backoffice.settings");
 
 });
-
 
 
 

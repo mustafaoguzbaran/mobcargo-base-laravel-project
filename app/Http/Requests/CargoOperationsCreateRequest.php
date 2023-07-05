@@ -22,13 +22,13 @@ class CargoOperationsCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "gonderen_username" => ["required", "min:1"],
-            "gonderilen_username" => ["required", "min:1"],
-            "verici_sube"=>["required", "min:2"],
-            "alici_sube"=>["required", "min:2"],
-            "gonderilen_il"=>["required", "min:2"],
-            "gonderilen_ilce"=>["required", "min:2"],
-            "tam_adres" => ["required", "min:2"]
+            "posted_by_username" => ["required", "min:1"],
+            "sender_by_username" => ["required", "min:1"],
+            "donor_branch"=>["required", "min:2"],
+            "receiving_branch"=>["required", "min:2"],
+            "sent_province"=>["required", "min:2"],
+            "sent_district"=>["required", "min:2"],
+            "full_adress" => ["required", "min:2"]
         ];
     }
 }

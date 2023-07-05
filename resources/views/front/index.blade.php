@@ -45,7 +45,7 @@
                         <form action="{{route("checkCargo")}}" method="POST">
                             @csrf
                             @method("POST")
-                        <label class="form-label">6 Haneli Takip Numaranız:</label>
+                        <label class="form-label">Takip Numaranızı Giriniz:</label>
                         <x-front.elements.input :name="'checkCargo'" :placeholder="'takip numaranızı giriniz...'" class="form-control"></x-front.elements.input>
                         <x-front.elements.input :type="'submit'" class="btn btn-warning" :value="'Kargo Durumunu Sorgula!'" :name="'check'" style="padding: 10px; margin-top: 20px"></x-front.elements.input>
                         </form>

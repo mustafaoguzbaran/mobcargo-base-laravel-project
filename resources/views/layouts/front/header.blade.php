@@ -21,14 +21,14 @@ $get_logo = (\App\Models\Settings::query()->value("logo"));
                 </li>
                 @if(!Auth::check())
                     <li class="nav-item">
-                        <a class="nav-link {{Route::is("login") ? "active" : ""}}" href="{{route("login")}}">Giriş Yap</a>
+                        <a class="nav-link {{Route::is("login.index") ? "active" : ""}}" href="{{route("login.index")}}">Giriş Yap</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{Route::is("register") ? "active" : "" }}" href="{{route("register")}}">Kayıt Ol</a>
+                        <a class="nav-link {{Route::is("register.index") ? "active" : "" }}" href="{{route("register.index")}}">Kayıt Ol</a>
                     </li>
                 @else
                     <li class="nav-item">
-                        <a class="nav-link {{Route::is("useredit") ? "active" : "" }}" href="{{route("useredit")}}">Hesap Ayarları</a>
+                        <a class="nav-link {{Route::is("user.edit") ? "active" : "" }}" href="{{route("user.edit", ["id" => auth()->user()->id])}}">Hesap Ayarları</a>
                     </li>
                 @role("Admin")
                     <li class="nav-item">

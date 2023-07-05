@@ -7,15 +7,15 @@
         <div class="row">
             <div class="col-12">
                 <x-admin.layouts.card>
-                    @foreach($userData as $item)
+                    @foreach($getUserData as $item)
                     <x-slot name="title">{{$item->username}} Kullanıcısı Düzenle</x-slot>
                             <x-slot name="content">
-                                <form method="POST" action="{{route("backoffice.useredit", ['id' => $item->id])}}">
+                                <form method="POST" action="{{route("backoffice.user.update", ['id' => $item->id])}}">
                                     @csrf
                                     @method("PATCH")
                                     <label class="form-label">Yetki Ver</label>
                                     <select class="form-select" name="role" aria-label="Default select example">
-                                        @foreach($test as $role)
+                                        @foreach($getRoleData as $role)
                                         <option value="{{$role->name}}">{{$role->name}}</option>
                                         @endforeach
                                     </select>

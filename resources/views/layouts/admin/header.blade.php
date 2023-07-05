@@ -18,7 +18,7 @@
                     <a class="nav-link {{Route::is("backoffice.settings") ? "active" : "" }}" href="{{route("backoffice.settings")}}">Genel Ayarlar</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{Route::is("backoffice.cargooperations.show") ? "active" : ""}}" href="{{route("backoffice.cargooperations.show")}}">Kargo İşlemleri</a>
+                    <a class="nav-link {{Route::is("cargos.index") ? "active" : ""}}" href="{{route("cargos.index")}}">Kargo İşlemleri</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{Route::is("backoffice.users") ? "active" : "" }}" href="{{route("backoffice.users")}}">Kullanıcılar</a>
