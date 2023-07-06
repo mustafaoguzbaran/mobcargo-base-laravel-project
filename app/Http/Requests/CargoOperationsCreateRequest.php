@@ -28,7 +28,7 @@ class CargoOperationsCreateRequest extends FormRequest
             "receiving_branch"=>["required", "min:2"],
             "sent_province"=>["required", "min:2"],
             "sent_district"=>["required", "min:2"],
-            "full_adress" => ["required", "min:2"]
+            "full_address" => ["required", "min:2"]
         ];
     }
 }

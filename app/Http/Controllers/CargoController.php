@@ -51,17 +51,17 @@ class CargoController extends Controller
 
     public function update(Request $request)
     {
-        $data = [
+        $cargoDataUpdateList = [
             "gonderen_username" => $request->posted_by_username,
             "gonderilen_username" => $request->sender_by_username,
             "verici_sube" => $request->donor_branch,
             "alici_sube" => $request->receiving_branch,
             "gonderilen_il" => $request->sent_province,
             "gonderilen_ilce" => $request->sent_district,
-            "tam_adres" => $request->full_adress,
+            "tam_adres" => $request->full_address,
             "kargo_durum" => $request->cargo_status,
         ];
-        Cargo::where("id", $request->id)->update(array_filter($data));
+        Cargo::where("id", $request->id)->update(array_filter($cargoDataUpdateList));
         return redirect()->route("cargos.edit", ['id' => $request->id]);
     }
 }

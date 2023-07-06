@@ -63,22 +63,22 @@ class CargoController extends Controller
 
     public function store(Request $request)
     {
-        $cargoAddData = [
-            "gonderen_username" => $request->gonderen_username,
-            "gonderilen_username" => $request->gonderilen_username,
-            "verici_sube" => $request->verici_sube,
-            "alici_sube" => $request->alici_sube,
-            "gonderilen_il" => $request->gonderilen_il,
-            "gonderilen_ilce" => $request->gonderilen_ilce,
-            "tam_adres" => $request->tam_adres,
+        $cargoDataAddList = [
+            "gonderen_username" => $request->posted_by_username,
+            "gonderilen_username" => $request->sender_by_username,
+            "verici_sube" => $request->donor_branch,
+            "alici_sube" => $request->receiving_branch,
+            "gonderilen_il" => $request->sent_province,
+            "gonderilen_ilce" => $request->sent_district,
+            "tam_adres" => $request->full_address,
             "kargo_durum" => "Verici Şubede"
         ];
         if (Auth::user()->hasRole("API Manager")) {
-            $cargo = Cargo::create($cargoAddData);
+            $cargo = Cargo::create($cargoDataAddList);
             return response()->json([
                 "status" => "success",
                 "message" => "kargo başarıyla eklendi",
-                "data" => $cargoAddData
+                "data" => $cargoDataAddList
             ], 200);
         } else {
             return response()->json([
@@ -91,12 +91,21 @@ class CargoController extends Controller
     public function update(Request $request)
     {
         if (Auth::user()->hasRole('API Manager')) {
-            $cargoUpdateData = $request->only(["gonderen_username", "gonderilen_username", "verici_sube", "alici_sube", "gonderilen_il", "gonderilen_ilce", "tam_adres", "kargo_durum"]);
-            Cargo::find($request->id)->update($cargoUpdateData);
+            $cargoDataUpdateList = [
+                "gonderen_username" => $request->posted_by_username,
+                "gonderilen_username" => $request->sender_by_username,
+                "verici_sube" => $request->donor_branch,
+                "alici_sube" => $request->receiving_branch,
+                "gonderilen_il" => $request->sent_province,
+                "gonderilen_ilce" => $request->sent_district,
+                "tam_adres" => $request->full_address,
+                "kargo_durum" => $request->cargo_status,
+            ];
+            Cargo::where("id", $request->id)->update(array_filter($cargoDataUpdateList));
             return response()->json([
                 "status" => "success",
                 "message" => "Kargo başarıyla güncellendi",
-                "data" => $cargoUpdateData
+                "data" => $cargoDataUpdateList
             ], 200);
         } else {
             return response()->json([

@@ -83,10 +83,10 @@
                         @endif
                     </p>
                     <label class="form-label">Tam Adresi Giriniz: </label>
-                    <x-admin.elements.input :name="'full_adress'" :value="$item->tam_adres" :placeholder="'tam adresi giriniz...'" class="form-control"></x-admin.elements.input>
+                    <x-admin.elements.input :name="'full_address'" :value="$item->tam_adres" :placeholder="'tam adresi giriniz...'" class="form-control"></x-admin.elements.input>
                     <p>
-                        @if($errors->has("full_adress"))
-                            {{$errors->first("full_adress")}}
+                        @if($errors->has("full_address"))
+                            {{$errors->first("full_address")}}
                         @endif
                     </p>
                     <x-admin.elements.input :type="'submit'" :value="'Kargoyu Düzenle'" :name="'cargoCreate'" class="btn btn-warning" style="padding: 10px; margin-top: 20px"></x-admin.elements.input>

@@ -57,14 +57,14 @@ class UserController extends Controller
     public function store(RegisterRequest $request)
     {
 
-        $data = [
+        $userDataAddList = [
             "name" => $request->name_register,
             "username" => $request->username_register,
             "email" => $request->email_register,
             "phone_number" => $request->phone_register,
             "password" => $request->password_register,
         ];
-        $user = User::create($data);
+        $user = User::create($userDataAddList);
         $user->syncRoles(Role::find(4));
         return redirect()->route("home");
     }
@@ -92,17 +92,17 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
-        $userDataUpdateFront = array_filter([
+        $userDataUpdateList = array_filter([
             "name" => $request->name_edit,
             "username" => $request->username_edit,
             "email" => $request->email_edit,
             "phone_number" => $request->phone_edit,
         ]);
         if ($request->password_edit != null) {
-            $userDataUpdateFront['password'] = Hash::make($request->password_edit);
+            $userDataUpdateList['password'] = Hash::make($request->password_edit);
         }
         User::find($request->id)
-            ->update($userDataUpdateFront);
+            ->update($userDataUpdateList);
         if (Auth::user()->hasRole("Admin") && $request->role !== null) {
             $user = User::find($request->id);
             $user->syncRoles($request->role);

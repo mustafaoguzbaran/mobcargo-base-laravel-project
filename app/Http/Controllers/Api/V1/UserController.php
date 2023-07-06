@@ -66,7 +66,7 @@ class UserController extends Controller
 
     public function store(RegisterRequest $request)
     {
-        $userAddData = [
+        $userDataAddList = [
             "name" => $request->name_register,
             "username" => $request->username_register,
             "email" => $request->email_register,
@@ -74,12 +74,12 @@ class UserController extends Controller
             "password" => $request->password_register
         ];
         if (Auth::user()->hasRole('API Manager')) {
-            $user = User::create($userAddData);
+            $user = User::create($userDataAddList);
             $user->syncRoles(Role::find(4));
             return response()->json([
                 "status" => "success",
                 "message" => "kullanıcı başarıyla oluşturuldu",
-                "data" => $userAddData
+                "data" => $userDataAddList
             ], 200);
         } else {
             return response()->json([
@@ -92,12 +92,12 @@ class UserController extends Controller
     public function update(Request $request)
     {
         if (Auth::user()->hasRole('API Manager')) {
-            $userUpdateData = $request->only(["name", "username", "email", "phone_number", "password"]);
-            User::find($request->id)->update($userUpdateData);
+            $userUpdateDataList = $request->only(["name", "username", "email", "phone_number", "password"]);
+            User::find($request->id)->update($userUpdateDataList);
             return response()->json([
                 "status" => 'success',
                 "message" => 'kullanıcı verileri başarıyla güncellendi',
-                "data" => $userUpdateData
+                "data" => $userUpdateDataList
             ], 200);
         } else {
             return response()->json([
