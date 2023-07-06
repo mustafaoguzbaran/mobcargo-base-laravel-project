@@ -34,7 +34,7 @@ class HomeController extends Controller
 
     public function checkCargo(CheckCargoRequest $request)
     {
-
+        //Cargo inquiry process on the homepage with the tracking number takes place here. (tracking number depends on cargo id.)
         $getCheckCargo = Cargo::where("id", "=", $request->checkCargo)->get();
         if (empty($getCheckCargo[0])) {
             return redirect()->route("home");
@@ -45,7 +45,7 @@ class HomeController extends Controller
 
     public function search(Request $request)
     {
-
+        //The search box in the header works here. (user search intended.)
         $searchResult = User::query()->where("username", "LIKE", "{$request->search}%")
             ->orWhere("email", "LIKE", "{$request->search}%")
             ->orWhere("phone_number", "LIKE", "{$request->search}%")

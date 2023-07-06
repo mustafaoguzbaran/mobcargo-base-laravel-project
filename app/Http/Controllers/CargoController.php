@@ -10,6 +10,7 @@ class CargoController extends Controller
 {
     public function index(Request $request)
     {
+        //Here it sends the searched data to the cargo page if the search is done, if not, it sends all the data to the cargo page.
         if ($request->cargoOperationsSearch == null) {
             $getCargoList = Cargo::all();
             return view("admin.cargooperations", compact('getCargoList'));
@@ -23,6 +24,7 @@ class CargoController extends Controller
 
     public function store(CargoOperationsCreateRequest $request)
     {
+        //The registration of the cargo data to the database takes place here.
         $cargoDataCreateList = [
             "gonderen_username" => $request->posted_by_username,
             "gonderilen_username" => $request->sender_by_username,
@@ -39,18 +41,21 @@ class CargoController extends Controller
 
     public function destroy(Request $request)
     {
+        //Cargo deletion takes place here.
         Cargo::destroy(intval($request->id));
         return redirect(route("backoffice.cargooperations.show"));
     }
 
     public function edit(Request $request)
     {
+        //Passes the cargo edit information to the cargoedit view.
         $getCargoInfo = Cargo::where("id", $request->id)->get();
         return view("admin.cargoedit", compact("getCargoInfo"));
     }
 
     public function update(Request $request)
     {
+        //The update of the cargo information takes place here.
         $cargoDataUpdateList = [
             "gonderen_username" => $request->posted_by_username,
             "gonderilen_username" => $request->sender_by_username,

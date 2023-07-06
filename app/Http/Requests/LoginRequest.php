@@ -22,12 +22,14 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
+            //This is where request checks happen on the backend.
             "username" => ["required", "exists:users"],
             "password" => ["required"]
         ];
     }
     public function messages()
     {
+        //If we want to display a user-specific error message on the frontend, we use this function.
         return [
             "username.exists" => "bilgilerinizi kontrol edin!"
         ];

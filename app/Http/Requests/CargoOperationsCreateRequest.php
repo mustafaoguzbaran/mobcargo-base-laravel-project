@@ -21,6 +21,7 @@ class CargoOperationsCreateRequest extends FormRequest
      */
     public function rules(): array
     {
+        //This is where request checks happen on the backend.
         return [
             "posted_by_username" => ["required", "min:1"],
             "sender_by_username" => ["required", "min:1"],

@@ -9,12 +9,14 @@ class SettingController extends Controller
 {
     public function index()
     {
+        //This function is for sending software general settings information to the settings view.
         $getSettingsData = Settings::all();
         return view("admin.settings", compact("getSettingsData"));
     }
 
     public function update(Request $request)
     {
+        //The general settings update process takes place here.
         $updateDataList = array_filter([
             "logo" => $request->logo_update,
             "main_header" => $request->main_header_update,

@@ -22,6 +22,7 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
+            //This is where request checks happen on the backend.
             "name_register" => ["required", "min:2"],
             "email_register" => ["required", "min:2", "unique:users,email"],
             "username_register" => ["required", "min:2", "unique:users,username"],
@@ -32,6 +33,7 @@ class RegisterRequest extends FormRequest
 
     public function messages()
     {
+        //If we want to display a user-specific error message on the frontend, we use this function.
         return [
             "username_register.unique" => "böyle bir kullanıcı adı zaten alınmış!",
             "email_register.unique" => "bu eposta ile önceden kayıt olunmuş!"

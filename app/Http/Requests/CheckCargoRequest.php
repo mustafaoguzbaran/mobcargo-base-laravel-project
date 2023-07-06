@@ -23,12 +23,14 @@ class CheckCargoRequest extends FormRequest
     public function rules(): array
     {
         return [
+            //This is where request checks happen on the backend.
             "checkCargo" => ["required", "exists:cargos,id", "min:1"]
         ];
     }
 
     public function messages()
     {
+        //If we want to display a user-specific error message on the frontend, we use this function.
         return [
             "checkCargo.exists" => "girdiğiniz takip numarasına ait kargo bilgileri bulunamadı!",
             "checkCargo.required" => "lütfen kargo numaranızı giriniz!"
