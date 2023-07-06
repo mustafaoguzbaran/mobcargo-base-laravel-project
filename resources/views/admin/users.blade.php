@@ -32,7 +32,7 @@
                                 <td>{{$item->name}}</td>
                                 <td>{{$item->email}}</td>
                                 <td>{{$item->username}}</td>
-                                <td>{{$item->auth}}</td>
+                                <td>{{$item->getRoleNames()->implode(', ')}}</td>
                                 <td>{{$item->phone_number}}</td>
                                 <td>
                                     <form action="{{route('backoffice.user.edit', ['id' => $item->id])}}" method="GET">

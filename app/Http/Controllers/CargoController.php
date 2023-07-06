@@ -36,14 +36,14 @@ class CargoController extends Controller
             "kargo_durum" => "Verici Şubede"
         ];
         Cargo::create($cargoDataCreateList);
-        return redirect()->route("backoffice.cargooperations.show");
+        return redirect()->route("cargos.index");
     }
 
     public function destroy(Request $request)
     {
         //Cargo deletion takes place here.
         Cargo::destroy(intval($request->id));
-        return redirect(route("backoffice.cargooperations.show"));
+        return redirect(route("cargos.index"));
     }
 
     public function edit(Request $request)
